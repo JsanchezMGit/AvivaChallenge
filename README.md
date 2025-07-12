@@ -68,7 +68,7 @@ dotnet user-secrets init --project Products.WebApi
 
 3. Agrega la clave ApiKey con el valor que desees:
 ```bash
-dotnet user-secrets set "ApiKey" "72P4gUoC0E+MD9o9xhp9fQ=="
+dotnet user-secrets set "ApiKey" "72P4gUoC0E+MD9o9xhp9fQ==" --project Products.WebApi
 ```
 
 Esto almacena la clave en un archivo seguro fuera del repositorio, en:
