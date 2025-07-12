@@ -63,7 +63,7 @@ cd BE/Products/Products.WebApi
 
 2. Ejecuta el siguiente comando para inicializar los secretos (si no lo has hecho antes):
 ```bash
-dotnet user-secrets init
+dotnet user-secrets init --project Products.WebApi
 ```
 
 3. Agrega la clave ApiKey con el valor que desees:
