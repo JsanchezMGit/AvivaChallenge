@@ -46,22 +46,6 @@ Este proyecto es una API REST construida con **.NET 9 y Minimal API**, diseñada
 
 ### Desde la terminal
 
-1. Entra al directorio del proyecto:
-
-```bash
-cd BE/Products/Products.WebApi
-```
-
-2. Restaura los paquetes:
-```bash
-dotnet restore
-```
-
-3. Ejecuta la API:
-```bash
-dotnet run --profile http
-```
-
 🔐 Autenticación por API Key (vía secrets.json)
 Todos los endpoints requieren el header:
 
@@ -94,6 +78,16 @@ Esto almacena la clave en un archivo seguro fuera del repositorio, en:
 ```
 
 El middleware personalizado leerá automáticamente este valor desde la configuración, este valor es el que debe ser enviado en el header (`X-Api-Key`)
+
+3. Restaura los paquetes:
+```bash
+dotnet restore
+```
+
+3. Ejecuta la API:
+```bash
+dotnet run --profile http
+```
 
 🔒 Seguridad
 - No almacenes la clave en appsettings.json en entornos compartidos.
