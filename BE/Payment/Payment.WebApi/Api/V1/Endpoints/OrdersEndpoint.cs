@@ -1,3 +1,5 @@
+using Payment.Application.UseCases;
+
 namespace Payment.WebApi.Api.V1.Endpoints;
 
 public static class OrdersEndpoint
@@ -14,8 +16,9 @@ public static class OrdersEndpoint
     public static void GetOrdersEndpoint(WebApplication app)
     {
 
-        app.MapGet("/orders", () =>
+        app.MapGet("/orders", async (GetOrdersUseCase getOrdersUseCase) =>
         {
+            return await getOrdersUseCase.ExecuteAsync();
         })
         .WithName("GetOrders")
         .WithOpenApi();        

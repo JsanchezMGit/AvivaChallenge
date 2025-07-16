@@ -1,3 +1,8 @@
+using Payment.Application.DTOs;
+using Payment.Application.Interfaces;
+using Payment.Application.UseCases;
+using Payment.Enterprice.Entities;
+using Payment.Mappers;
 using Payment.WebApi;
 using Payment.WebApi.Api.V1.Endpoints;
 using Payment.WebApi.Authentication;
@@ -8,6 +13,9 @@ builder.Services.AddEndpointsApiExplorer();
 SwaggerConfiguration.SetConfig(builder);
 
 builder.Services.AddAuthorization();
+builder.Services.AddScoped<IMapper<OrderResponseDTO, OrderEntity>, OrderMapper>();
+builder.Services.AddScoped<GetOrdersUseCase>();
+ExternalServicesConfiguration.SetConfig(builder);
 
 var app = builder.Build();
 
