@@ -1,6 +1,5 @@
 using Payment.Adapters;
 using Payment.Application.Interfaces;
-using Payment.Enterprice.Entities;
 using Payment.ExternalServices;
 
 namespace Payment.WebApi;
@@ -11,7 +10,7 @@ public static class ExternalServicesConfiguration
     {
         builder.Services.AddScoped<ICazaPagosService, CazaPagosService>();
         builder.Services.AddScoped<IPagaFacilService, PagaFacilService>();
-        builder.Services.AddScoped<IExternalServiceAdapter<OrderEntity>, OrderExternalServiceAdapter>();
+        builder.Services.AddScoped<IExternalServiceAdapter, OrderExternalServiceAdapter>();
         builder.Services.AddHttpClient<ICazaPagosService, CazaPagosService>(client =>
         {
             var baseUrl = builder.Configuration["BaseUrlCazaPagos"];

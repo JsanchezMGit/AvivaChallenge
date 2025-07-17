@@ -1,6 +1,9 @@
 using System.Text.Json;
 using Payment.Application.DTOs;
 using Payment.Application.Interfaces;
+using Payment.Enterprice.Enums;
+using Payment.Enterprice.Shared;
+using Payment.Mappers;
 
 namespace Payment.ExternalServices;
 
@@ -43,8 +46,12 @@ public class CazaPagosService : PaymentServicePartial, ICazaPagosService
     }
 
     public async Task<OrderResponseDTO> SetOrderAsync(OrderRequestDTO orderRequest)
-    {
-        var requestString = JsonSerializer.Serialize(orderRequest);
+    {        
+        var paymentMethod = orderRequest.Method.TryParse<OrderPaymentMethod>();
+        if (!paymentMethod.HasValue)
+            throw new ArgumentException("Invalid payment method.", nameof(orderRequest.Method));
+        orderRequest.Method = PaymentMethodMapper.ToProviderMethod(OrderProvider.CazaPagos, paymentMethod.Value);
+        var requestString = JsonSerializer.Serialize(orderRequest, _options);
         var content = new StringContent(requestString, System.Text.Encoding.UTF8, "application/json");
         var response = await _httpClient.PostAsync($"{_httpClient.BaseAddress}/Order", content);
         response.EnsureSuccessStatusCode();

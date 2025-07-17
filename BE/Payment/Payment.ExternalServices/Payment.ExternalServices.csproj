@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="../Payment.Adapters/Payment.Adapters.csproj" />
     <ProjectReference Include="../Payment.Application/Payment.Application.csproj" />
+    <ProjectReference Include="../Payment.Mappers/Payment.Mappers.csproj" />
   </ItemGroup>
 
 </Project>

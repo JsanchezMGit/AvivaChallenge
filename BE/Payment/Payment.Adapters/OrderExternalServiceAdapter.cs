@@ -2,27 +2,28 @@
 using Payment.Application.DTOs;
 using Payment.Application.Interfaces;
 using Payment.Enterprice.Entities;
+using Payment.Enterprice.Enums;
 
 namespace Payment.Adapters;
 
-public class OrderExternalServiceAdapter : IExternalServiceAdapter<OrderEntity>
+public class OrderExternalServiceAdapter : IExternalServiceAdapter
 {
-    private readonly Dictionary<string, Func<IExternalService>> _providerResolvers;
+    private readonly Dictionary<OrderProvider, Func<IExternalService>> _providerResolvers;
     private readonly IMapper<OrderResponseDTO, OrderEntity> _mapper;
     public OrderExternalServiceAdapter(
         ICazaPagosService cazaPagosService,
         IPagaFacilService pagaFacilService,
         IMapper<OrderResponseDTO, OrderEntity> mapper)
     {
-        _providerResolvers = new Dictionary<string, Func<IExternalService>>
+        _providerResolvers = new Dictionary<OrderProvider, Func<IExternalService>>
         {
-            ["CazaPagos"] = () => cazaPagosService,
-            ["PagaFacil"] = () => pagaFacilService
+            [OrderProvider.CazaPagos] = () => cazaPagosService,
+            [OrderProvider.PagaFacil] = () => pagaFacilService
         };        
         _mapper = mapper;
     }
 
-    public async Task<OrderEntity> GetOrderAsync(string id, string provider)
+    public async Task<OrderEntity> GetOrderAsync(string id, OrderProvider provider)
     {
         var order = await ExecuteProviderOperationAsync(
             provider,
@@ -31,7 +32,7 @@ public class OrderExternalServiceAdapter : IExternalServiceAdapter<OrderEntity>
         return order;
     }
 
-    public async Task<IEnumerable<OrderEntity>> GetOrdersAsync(string provider)
+    public async Task<IEnumerable<OrderEntity>> GetOrdersAsync(OrderProvider provider)
     {
         var orders = await ExecuteProviderOperationAsync(
             provider,
@@ -39,9 +40,18 @@ public class OrderExternalServiceAdapter : IExternalServiceAdapter<OrderEntity>
             orders => orders.Select(_mapper.ToEntity));
         return orders;
     }
-    
+
+    public async Task<OrderEntity> SetOrderAsync(OrderRequestDTO orderRequest, OrderProvider provider)
+    { 
+        var order = await ExecuteProviderOperationAsync(
+            provider,
+            p => p.SetOrderAsync(orderRequest),
+            _mapper.ToEntity);
+        return order;
+    }
+
     private async Task<TResult> ExecuteProviderOperationAsync<TServiceResult, TResult>(
-        string providerName,
+        OrderProvider providerName,
         Func<IExternalService, Task<TServiceResult>> providerOperation,
         Func<TServiceResult, TResult> resultMapper)
     {

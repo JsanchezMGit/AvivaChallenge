@@ -1,5 +1,6 @@
 using Payment.Application.DTOs;
 using Payment.Application.Interfaces;
+using Payment.Application.Services;
 using Payment.Application.UseCases;
 using Payment.Enterprice.Entities;
 using Payment.Mappers;
@@ -13,8 +14,12 @@ builder.Services.AddEndpointsApiExplorer();
 SwaggerConfiguration.SetConfig(builder);
 
 builder.Services.AddAuthorization();
+builder.Services.AddScoped<IPaymentProviderSelector, PaymentProviderSelector>();
+builder.Services.AddScoped<IFeeCalculator, CazaPagosFee>();
+builder.Services.AddScoped<IFeeCalculator, PagaFacilFee>();
 builder.Services.AddScoped<IMapper<OrderResponseDTO, OrderEntity>, OrderMapper>();
 builder.Services.AddScoped<GetOrdersUseCase>();
+builder.Services.AddScoped<SetOrderUseCase>();
 ExternalServicesConfiguration.SetConfig(builder);
 
 var app = builder.Build();

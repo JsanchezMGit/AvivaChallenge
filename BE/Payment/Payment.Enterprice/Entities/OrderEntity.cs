@@ -12,4 +12,5 @@ public class OrderEntity
     public OrderPaymentMethod PaymentMethod { get; set; }
     public List<FeeEntity>? Fees { get; set; }
     public List<ProductEntity>? Products { get; set; }
+    public OrderProvider Provider { get; set; }
 }

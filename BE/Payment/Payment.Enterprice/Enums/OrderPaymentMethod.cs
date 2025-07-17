@@ -5,5 +5,5 @@ public enum OrderPaymentMethod
     Cash,
     Card,
     CreditCard,
-    Transfer    
+    Transfer
 }

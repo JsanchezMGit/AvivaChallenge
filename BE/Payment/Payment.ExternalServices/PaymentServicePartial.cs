@@ -11,6 +11,7 @@ public partial class PaymentServicePartial
         _httpClient = httpClient;
         _options = new JsonSerializerOptions
         {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             PropertyNameCaseInsensitive = true
         };
     }

@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+using Payment.Application.DTOs;
 using Payment.Application.UseCases;
 
 namespace Payment.WebApi.Api.V1.Endpoints;
@@ -6,8 +8,9 @@ public static class OrdersEndpoint
 {
     public static void PostOrderEndpoint(WebApplication app)
     {
-        app.MapPost("/orders", () =>
+        app.MapPost("/v1/orders", async ([FromBody] OrderRequestDTO orderRequest, [FromServices] SetOrderUseCase setOrderUseCase) =>
         {
+            return await setOrderUseCase.ExecuteAsync(orderRequest);
         })
         .WithName("PostOrder")
         .WithOpenApi();
@@ -16,7 +19,7 @@ public static class OrdersEndpoint
     public static void GetOrdersEndpoint(WebApplication app)
     {
 
-        app.MapGet("/orders", async (GetOrdersUseCase getOrdersUseCase) =>
+        app.MapGet("/v1/orders", async (GetOrdersUseCase getOrdersUseCase) =>
         {
             return await getOrdersUseCase.ExecuteAsync();
         })
@@ -26,7 +29,7 @@ public static class OrdersEndpoint
 
     public static void GetOrderEndpoint(WebApplication app)
     {
-        app.MapGet("/orders/{id}", (string id) =>
+        app.MapGet("/v1/orders/{id}", (string id) =>
         {
         })
         .WithName("GetOrder")
@@ -35,7 +38,7 @@ public static class OrdersEndpoint
 
     public static void CancelOrderEndpoint(WebApplication app)
     {
-        app.MapDelete("/orders/{id}", (string id) =>
+        app.MapDelete("/v1/orders/{id}", (string id) =>
         {
         })
         .WithName("CancelOrder")
@@ -44,7 +47,7 @@ public static class OrdersEndpoint
     
     public static void PayOrderEndpoint(WebApplication app)
     { 
-        app.MapPatch("/orders/{id}", (string id) => { 
+        app.MapPatch("/v1/orders/{id}", (string id) => { 
         })
         .WithName("PayOrder")
         .WithOpenApi();

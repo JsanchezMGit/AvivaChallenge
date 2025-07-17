@@ -1,7 +1,12 @@
+using Payment.Application.DTOs;
+using Payment.Enterprice.Entities;
+using Payment.Enterprice.Enums;
+
 namespace Payment.Application.Interfaces;
 
-public interface IExternalServiceAdapter<T>
+public interface IExternalServiceAdapter
 {
-    Task<IEnumerable<T>> GetOrdersAsync(string provider);
-    Task<T> GetOrderAsync(string id, string provider);
+    Task<IEnumerable<OrderEntity>> GetOrdersAsync(OrderProvider provider);
+    Task<OrderEntity> GetOrderAsync(string id, OrderProvider provider);
+    Task<OrderEntity> SetOrderAsync(OrderRequestDTO orderRequest, OrderProvider provider);
 }
