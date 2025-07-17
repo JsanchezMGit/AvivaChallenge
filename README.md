@@ -9,10 +9,14 @@ repo-root/
 │
 ├── BE/ # Proyecto Backend (.NET API)
 │ ├── Payment/
+| | ├── Payment.Adapters/
+| | ├── Payment.Application/
+| | ├── Payment.Enterprice/
+| | ├── Payment.ExternalServices/
+| | ├── Payment.Mappers/
 | | ├── Payment.WebApi/
 │ ├── Products/
 | | ├── Products.WebApi/
-│ └── ... # Otros proyectos en construccion
 └── README.md
 ```
 
