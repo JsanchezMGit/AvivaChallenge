@@ -38,7 +38,7 @@ public static class OrdersEndpoint
     public static void CancelOrderEndpoint(WebApplication app)
     {
         app.MapDelete("/v1/orders/{id}", async (string id, CancelOrderUseCase cancelOrderUseCase) => {
-            await cancelOrderUseCase.ExecuteAsync(id);
+            return await cancelOrderUseCase.ExecuteAsync(id);
         })
         .WithName("CancelOrder")
         .WithOpenApi();
@@ -47,7 +47,7 @@ public static class OrdersEndpoint
     public static void PayOrderEndpoint(WebApplication app)
     {
         app.MapPatch("/v1/orders/{id}", async (string id, PayOrderUseCase payOrderUseCase) => {
-            await payOrderUseCase.ExecuteAsync(id);
+            return await payOrderUseCase.ExecuteAsync(id);
         })
         .WithName("PayOrder")
         .WithOpenApi();

@@ -9,6 +9,11 @@ export type Order = {
   provider: string;
 }
 
+export type OrderStatusChange = {
+  orderId: string;
+  status: 'Paid' | 'Cancelled';
+}
+
 export type Fee = {
   name: string;
   amount: number;
@@ -47,5 +52,5 @@ export const FAILED = "failed";
 export const FETCH_ORDERS = "orders";
 export const FETCH_ORDER = "orders/get";
 export const CREATE_ORDER = "orders/post";
-export const UPDATE_ORDER = "orders/put";
+export const PATCH_ORDER = "orders/patch";
 export const DELETE_ORDER = "orders/delete";

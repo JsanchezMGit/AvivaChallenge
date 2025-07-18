@@ -9,6 +9,6 @@ public interface IExternalServiceAdapter
     Task<OrderEntity> SetOrderAsync(OrderRequestDTO orderRequest, OrderProvider provider);
     Task<IEnumerable<OrderEntity>> GetOrdersAsync(OrderProvider provider);
     Task<OrderEntity> GetOrderAsync(string id, OrderProvider provider);
-    Task CancelOrderAsync(string id, OrderProvider provider);
-    Task PayOrderAsync(string id, OrderProvider provider);
+    Task<OrderStatusChangeDTO> CancelOrderAsync(string id, OrderProvider provider);
+    Task<OrderStatusChangeDTO> PayOrderAsync(string id, OrderProvider provider);
 }

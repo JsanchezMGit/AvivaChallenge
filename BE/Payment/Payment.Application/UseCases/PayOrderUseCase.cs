@@ -1,4 +1,5 @@
 
+using Payment.Application.DTOs;
 using Payment.Application.Interfaces;
 using Payment.Enterprice.Entities;
 
@@ -15,9 +16,9 @@ public class PayOrderUseCase
         _externalService = externalServiceAdapter;
         _repository = repository;
     }
-    public async Task ExecuteAsync(string id)
+    public async Task<OrderStatusChangeDTO> ExecuteAsync(string id)
     {
         var orderModel = await _repository.GetByIdAsync(id);
-        await _externalService.PayOrderAsync(id, orderModel.Provider);
+        return await _externalService.PayOrderAsync(id, orderModel.Provider);
     }
 }

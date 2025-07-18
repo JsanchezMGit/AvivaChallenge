@@ -1,27 +1,19 @@
-import { useState } from 'react';
 import { statusClasses, statusLabels, type Order } from '../../types';
 import './index.css';
 
 interface OrderListProps {
   orders: Order[];
   onCancel: (order: string) => void;
-  onUpdate: (order: string) => void;
+  onPay: (order: string) => void;
 }
 
-const OrderList = ({ orders, onCancel, onUpdate }: OrderListProps) => {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const term = e.target.value;
-    setSearchTerm(term);
-  };
-
+const OrderList = ({ orders, onCancel, onPay }: OrderListProps) => {
   const handleCancelButton = (guideId: string) => {
     onCancel(guideId);
   }
 
   const handlePayButton = (guideId: string) => {
-    onUpdate(guideId);
+    onPay(guideId);
   }
 
   return (

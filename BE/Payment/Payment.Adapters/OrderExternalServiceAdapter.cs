@@ -23,9 +23,15 @@ public class OrderExternalServiceAdapter : IExternalServiceAdapter
         _mapper = mapper;
     }
 
-    public async Task CancelOrderAsync(string id, OrderProvider provider) =>
+    public async Task<OrderStatusChangeDTO> CancelOrderAsync(string id, OrderProvider provider)
+    {
         await ExecuteProviderOperationAsync(provider, p => p.CancelOrderAsync(id));
-
+        return new OrderStatusChangeDTO
+        {
+            OrderId = id,
+            Status = OrderStatus.Cancelled.ToString()
+        };
+    }
     public async Task<OrderEntity> GetOrderAsync(string id, OrderProvider provider)
     {
         var order = await ExecuteProviderOperationAsync(
@@ -48,8 +54,15 @@ public class OrderExternalServiceAdapter : IExternalServiceAdapter
         return orders;
     }
 
-    public async Task PayOrderAsync(string id, OrderProvider provider) =>
+    public async Task<OrderStatusChangeDTO> PayOrderAsync(string id, OrderProvider provider)
+    {
         await ExecuteProviderOperationAsync(provider, p => p.PayOrderAsync(id));
+        return new OrderStatusChangeDTO
+        {
+            OrderId = id,
+            Status = OrderStatus.Paid.ToString()
+        };        
+    }
 
     public async Task<OrderEntity> SetOrderAsync(OrderRequestDTO orderRequest, OrderProvider provider)
     {

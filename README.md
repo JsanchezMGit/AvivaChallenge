@@ -143,9 +143,9 @@ npm run lint         # Ejecuta ESLint para revisar el código
 
 1. **Iniciar en modo desarrollo**:
 ```bash
-npm run dev
+npm run dev -- --port 5555
 ```
-La aplicación estará disponible en `http://localhost:5173`
+La aplicación estará disponible en `http://localhost:5555`
 
 2. **Hot Module Replacement (HMR)**: Los cambios se reflejan automáticamente sin recargar la página
 
