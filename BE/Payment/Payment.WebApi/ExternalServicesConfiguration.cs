@@ -1,5 +1,6 @@
 using Payment.Adapters;
 using Payment.Application.Interfaces;
+using Payment.Application.Services;
 using Payment.ExternalServices;
 
 namespace Payment.WebApi;
@@ -8,6 +9,9 @@ public static class ExternalServicesConfiguration
 {
     public static void SetConfig(WebApplicationBuilder builder)
     {
+        builder.Services.AddScoped<IPaymentProviderSelector, PaymentProviderSelector>();
+        builder.Services.AddScoped<IFeeCalculator, CazaPagosFee>();
+        builder.Services.AddScoped<IFeeCalculator, PagaFacilFee>();
         builder.Services.AddScoped<ICazaPagosService, CazaPagosService>();
         builder.Services.AddScoped<IPagaFacilService, PagaFacilService>();
         builder.Services.AddScoped<IExternalServiceAdapter, OrderExternalServiceAdapter>();
