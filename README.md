@@ -11,9 +11,13 @@ repo-root/
 │ ├── Payment/
 | | ├── Payment.Adapters/
 | | ├── Payment.Application/
+| | ├── Payment.Data
 | | ├── Payment.Enterprice/
 | | ├── Payment.ExternalServices/
 | | ├── Payment.Mappers/
+| | ├── Payment.Models
+| | ├── Payment.Presenter
+| | ├── Payment.Repository
 | | ├── Payment.WebApi/
 │ ├── Products/
 | | ├── Products.WebApi/
@@ -106,13 +110,14 @@ http://localhost:5228/swagger
 📦 Endpoints disponibles
 
 ```text
-| Método  | Ruta             | Descripción                             | Autenticación |
-| ------- | ---------------- | --------------------------------------- | ------------- |
-| GET     | `/orders`        | Devuelve lista de ordenes.              | Sí (API Key)  |
-| GET     | `/orders/{id}`   | Devuelve la orden dado su id.           | Sí (API Key)  |
-| POST    | `/orders`        | Guarda una orden.                       | Sí (API Key)  |
-| DELETE  | `/orders/{id}`   | Cancela una orden dado su id.           | Sí (API Key)  |
-| PATCH   | `/orders/{id}`   | Marca como pagada una orden dado su id. | Sí (API Key)  |
+| Método  | Ruta             | Descripción                                     | Autenticación |
+| ------- | ---------------- | ----------------------------------------------- | ------------- |
+| GET     | `/orders`        | Devuelve lista de ordenes.                      | Sí (API Key)  |
+| GET     | `/orders/{id}`   | Devuelve la orden dado su id.                   | Sí (API Key)  |
+| POST    | `/orders`        | Guarda una orden.                               | Sí (API Key)  |
+| DELETE  | `/orders/{id}`   | Cancela una orden dado su id.                   | Sí (API Key)  |
+| PATCH   | `/orders/{id}`   | Marca como pagada una orden dado su id.         | Sí (API Key)  |
+| PATCH   | `/sync/orders`   | Sinconiza la BD con los datos de los provedores | Sí (API Key)  |
 ```
 
 🧹 Limpieza / Build
