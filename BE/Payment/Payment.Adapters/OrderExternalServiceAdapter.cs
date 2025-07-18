@@ -29,6 +29,7 @@ public class OrderExternalServiceAdapter : IExternalServiceAdapter
             provider,
             p => p.GetOrderAsync(id),
             _mapper.ToEntity);
+        order.Provider = provider;            
         return order;
     }
 
@@ -37,7 +38,10 @@ public class OrderExternalServiceAdapter : IExternalServiceAdapter
         var orders = await ExecuteProviderOperationAsync(
             provider,
             p => p.GetOrdersAsync(),
-            orders => orders.Select(_mapper.ToEntity));
+            orders => orders.Select(_mapper.ToEntity).ToList());
+            
+        foreach (var order in orders)
+            order.Provider = provider;
         return orders;
     }
 
@@ -47,6 +51,7 @@ public class OrderExternalServiceAdapter : IExternalServiceAdapter
             provider,
             p => p.SetOrderAsync(orderRequest),
             _mapper.ToEntity);
+        order.Provider = provider;
         return order;
     }
 

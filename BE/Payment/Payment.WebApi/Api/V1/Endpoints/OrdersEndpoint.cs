@@ -29,8 +29,9 @@ public static class OrdersEndpoint
 
     public static void GetOrderEndpoint(WebApplication app)
     {
-        app.MapGet("/v1/orders/{id}", (string id) =>
+        app.MapGet("/v1/orders/{id}", async (string id, GetOrderUseCase getOrderUseCase) =>
         {
+            return await getOrderUseCase.ExecuteAsync(id);
         })
         .WithName("GetOrder")
         .WithOpenApi();

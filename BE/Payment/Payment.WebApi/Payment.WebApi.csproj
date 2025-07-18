@@ -18,10 +18,12 @@
   <ItemGroup>
     <ProjectReference Include="../Payment.Adapters/Payment.Adapters.csproj" />
     <ProjectReference Include="../Payment.Application/Payment.Application.csproj" />
+    <ProjectReference Include="../Payment.Data/Payment.Data.csproj" />
     <ProjectReference Include="../Payment.Enterprice/Payment.Enterprice.csproj" />
     <ProjectReference Include="../Payment.ExternalServices/Payment.ExternalServices.csproj" />
     <ProjectReference Include="../Payment.Mappers/Payment.Mappers.csproj" />
-    <ProjectReference Include="../Paymet.DTOs/Payment.DTOs.csproj" />
+    <ProjectReference Include="../Payment.Models/Payment.Models.csproj" />
+    <ProjectReference Include="../Payment.Repository/Payment.Repository.csproj" />
   </ItemGroup>
 
 </Project>
