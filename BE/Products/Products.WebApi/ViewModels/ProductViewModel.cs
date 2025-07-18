@@ -7,11 +7,13 @@ public class ProductViewModel
     public string Name { get; set; }
     public string Descrition { get; set; }
     public string Status => _status;
-    public ProductViewModel(int id, string name, string description, int stock)
+    public decimal Price { get; set; }
+    public ProductViewModel(int id, string name, string description, int stock, decimal price)
     {
         Id = id;
         Name = name;
         Descrition = description;
         _status = stock > 0 ? "Available" : "Not available";
+        Price = price;
     }
 }

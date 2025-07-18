@@ -59,7 +59,7 @@ app.UseAuthorization();
 
 app.MapGet("/products", (AppDbContext dbcontext) =>
 {
-    var productList = dbcontext.Products.Select(p => new ProductViewModel(p.Id, p.Name, p.Descrition, p.Stock)).ToList();
+    var productList = dbcontext.Products.Select(p => new ProductViewModel(p.Id, p.Name, p.Descrition, p.Stock, p.Price)).ToList();
     return productList;
 })
 .WithName("GetProducts")
