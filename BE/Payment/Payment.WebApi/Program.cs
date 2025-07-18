@@ -7,6 +7,16 @@ using Payment.WebApi.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowedFrontend",
+        policy => policy
+            .WithOrigins("http://localhost:5174")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
+
 builder.Services.AddEndpointsApiExplorer();
 SwaggerConfiguration.SetConfig(builder);
 
@@ -20,6 +30,8 @@ builder.Services.AddScoped<SyncOrdersUseCase>();
 ExternalServicesConfiguration.SetConfig(builder);
 
 var app = builder.Build();
+
+app.UseCors("AllowedFrontend");
 
 if (app.Environment.IsDevelopment())
 {

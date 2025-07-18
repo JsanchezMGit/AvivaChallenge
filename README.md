@@ -21,7 +21,144 @@ repo-root/
 | | ├── Payment.WebApi/
 │ ├── Products/
 | | ├── Products.WebApi/
+├── FE/ # Proyecto Frontend (React)
+│ ├── products-app/
+│ | ├── src/
+| | | ├── api/           # Configuración de APIs y servicios
+| | | ├── components/    # Componentes reutilizables
+│ | | | └── ProductList/
+| | | ├── hooks/         # Hooks personalizados
+| | | ├── store/         # Configuración de Redux
+| | | ├── types/         # Definiciones de tipos TypeScript
+| | | ├── assets/        # Recursos estáticos
+| | | ├── App.tsx        # Componente principal
+| | | └── main.tsx       # Punto de entrada
 └── README.md
+```
+
+# PRODUCTS-APP (React) 🛍️
+
+Una aplicación web moderna para la gestión de órdenes de productos desarrollada con React, TypeScript y Vite. Esta aplicación permite visualizar, actualizar y cancelar órdenes de productos con una interfaz intuitiva y responsive.
+
+📁 La solución se encuentra dentro de la carpeta `FE/products-app`.
+
+## 📋 Características
+
+- **Gestión de Órdenes**: Visualización de órdenes con detalles de productos, tarifas y estado
+- **Estados de Órdenes**: Manejo de estados (Pendiente, Pagado, Cancelado)
+- **Interfaz Moderna**: UI responsive con iconos de FontAwesome
+- **Gestión de Estado**: Redux Toolkit para el manejo del estado global
+- **TypeScript**: Tipado estático para mayor robustez del código
+- **API Integration**: Comunicación con backend mediante Axios
+
+## 🚀 Tecnologías Utilizadas
+
+### Core
+- **React 19.1.0** - Biblioteca principal para la construcción de interfaces
+- **TypeScript 5.8.3** - Superset de JavaScript con tipado estático
+- **Vite 7.0.4** - Build tool rápido y moderno
+
+### Estado y Datos
+- **Redux Toolkit 2.8.2** - Gestión del estado de la aplicación
+- **React Redux 9.2.0** - Integración de Redux con React
+- **Axios 1.10.0** - Cliente HTTP para comunicación con APIs
+
+### UI/UX
+- **FontAwesome 6.7.2** - Biblioteca de iconos
+  - `@fortawesome/fontawesome-svg-core`
+  - `@fortawesome/free-solid-svg-icons`
+  - `@fortawesome/react-fontawesome`
+
+### Desarrollo
+- **ESLint 9.30.1** - Linting de código
+- **TypeScript ESLint 8.35.1** - Reglas específicas para TypeScript
+- **Vite Plugin React 4.6.0** - Plugin de React para Vite
+
+## ⚙️ Configuración del Entorno
+
+### Variables de Entorno
+
+Crea un archivo `.env` en la raíz del proyecto:
+
+```env
+VITE_API_KEY=72P4gUoC0E+MD9o9xhp9fQ==
+```
+
+### Configuración de la API
+
+La aplicación está configurada para conectarse a un backend en `http://localhost:5045/`. Asegúrate de que el servidor backend esté ejecutándose en este puerto.
+
+## 🛠️ Instalación y Configuración
+
+### Prerrequisitos
+
+- Node.js (versión 16 o superior)
+- npm o yarn
+
+### Pasos de Instalación
+
+1. **Clonar el repositorio**:
+```bash
+git clone https://github.com/JsanchezMGit/AvivaChallenge.git
+cd FE/products-app
+```
+
+2. **Instalar dependencias**:
+```bash
+npm install
+```
+
+3. **Configurar variables de entorno**:
+```bash
+cp .env.example .env
+# Editar .env con tus valores
+```
+
+4. **Iniciar el servidor de desarrollo**:
+```bash
+npm run dev
+```
+
+## 📦 Scripts Disponibles
+
+### Desarrollo
+```bash
+npm run dev          # Inicia el servidor de desarrollo
+npm run preview      # Vista previa de la build de producción
+```
+
+### Construcción
+```bash
+npm run build        # Construye la aplicación para producción
+```
+
+### Calidad de Código
+```bash
+npm run lint         # Ejecuta ESLint para revisar el código
+```
+
+## 🏗️ Compilación y Despliegue
+
+### Desarrollo Local
+
+1. **Iniciar en modo desarrollo**:
+```bash
+npm run dev
+```
+La aplicación estará disponible en `http://localhost:5173`
+
+2. **Hot Module Replacement (HMR)**: Los cambios se reflejan automáticamente sin recargar la página
+
+### Compilación para Producción
+
+1. **Generar build optimizada**:
+```bash
+npm run build
+```
+
+2. **Probar build localmente**:
+```bash
+npm run preview
 ```
 
 # 🧩 Payment.WebApi (.NET Minimal API)
