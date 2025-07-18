@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.Models", "Payment.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.Repository", "Payment.Repository\Payment.Repository.csproj", "{1599BCBC-1B4B-4F11-B0BE-D5EB2C8E1AE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.Presenters", "Payment.Presenter\Payment.Presenters.csproj", "{EC4D7736-97BB-46BF-9981-7115EC82F998}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -139,6 +141,18 @@ Global
 		{1599BCBC-1B4B-4F11-B0BE-D5EB2C8E1AE7}.Release|x64.Build.0 = Release|Any CPU
 		{1599BCBC-1B4B-4F11-B0BE-D5EB2C8E1AE7}.Release|x86.ActiveCfg = Release|Any CPU
 		{1599BCBC-1B4B-4F11-B0BE-D5EB2C8E1AE7}.Release|x86.Build.0 = Release|Any CPU
+		{EC4D7736-97BB-46BF-9981-7115EC82F998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC4D7736-97BB-46BF-9981-7115EC82F998}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC4D7736-97BB-46BF-9981-7115EC82F998}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EC4D7736-97BB-46BF-9981-7115EC82F998}.Debug|x64.Build.0 = Debug|Any CPU
+		{EC4D7736-97BB-46BF-9981-7115EC82F998}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EC4D7736-97BB-46BF-9981-7115EC82F998}.Debug|x86.Build.0 = Debug|Any CPU
+		{EC4D7736-97BB-46BF-9981-7115EC82F998}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC4D7736-97BB-46BF-9981-7115EC82F998}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC4D7736-97BB-46BF-9981-7115EC82F998}.Release|x64.ActiveCfg = Release|Any CPU
+		{EC4D7736-97BB-46BF-9981-7115EC82F998}.Release|x64.Build.0 = Release|Any CPU
+		{EC4D7736-97BB-46BF-9981-7115EC82F998}.Release|x86.ActiveCfg = Release|Any CPU
+		{EC4D7736-97BB-46BF-9981-7115EC82F998}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

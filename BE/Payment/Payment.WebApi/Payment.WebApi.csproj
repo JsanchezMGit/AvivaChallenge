@@ -23,6 +23,7 @@
     <ProjectReference Include="../Payment.ExternalServices/Payment.ExternalServices.csproj" />
     <ProjectReference Include="../Payment.Mappers/Payment.Mappers.csproj" />
     <ProjectReference Include="../Payment.Models/Payment.Models.csproj" />
+    <ProjectReference Include="../Payment.Presenter/Payment.Presenters.csproj" />
     <ProjectReference Include="../Payment.Repository/Payment.Repository.csproj" />
   </ItemGroup>
 
