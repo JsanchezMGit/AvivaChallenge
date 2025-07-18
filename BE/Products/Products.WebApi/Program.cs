@@ -6,6 +6,16 @@ using Products.WebApi.ViewModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowedFrontend",
+        policy => policy
+            .WithOrigins("http://localhost:5555")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -39,6 +49,8 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDataba
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
+
+app.UseCors("AllowedFrontend");
 
 using (var scope = app.Services.CreateScope())
 {

@@ -5,18 +5,19 @@ import {
   FETCH_ORDERS, PATCH_ORDER,
   DELETE_ORDER,
   type OrderStatusChange
-} from '../types';
-import paymentsApi from '../api';
+} from '../types/index';
+import { paymentsApi } from '../api';
 
 const initialState: AppState = {
   orders: [],
+  products: [],
   status: IDLE,
   error: null
 };
 
 export const fetchOrders = createAsyncThunk(FETCH_ORDERS, async () => {
     try {
-        const response = await paymentsApi.paymentsApi.get('orders');
+        const response = await paymentsApi.get('orders');
         return response.data as Order[];
     } catch (error) {
         console.error('Ocurrio un error al intentar obtener las ordenes', error);
@@ -26,7 +27,7 @@ export const fetchOrders = createAsyncThunk(FETCH_ORDERS, async () => {
 
 export const patchOrder = createAsyncThunk(PATCH_ORDER, async (id: string) => {
   try {
-      const response = await paymentsApi.paymentsApi.patch(`orders/${id}`);
+      const response = await paymentsApi.patch(`orders/${id}`);
       return response.data;
   } catch (error) {
       console.error(`Ocurrio un error al intentar pagar la orden`, error);
@@ -36,7 +37,7 @@ export const patchOrder = createAsyncThunk(PATCH_ORDER, async (id: string) => {
 
 export const deleteOrder = createAsyncThunk(DELETE_ORDER, async (id: string) => {
   try {
-      const response = await paymentsApi.paymentsApi.delete(`orders/${id}`);
+      const response = await paymentsApi.delete(`orders/${id}`);
       return response.data;
   } catch (error) {
       console.error(`Ocurrio un error al intentar cancelar la orden`, error);

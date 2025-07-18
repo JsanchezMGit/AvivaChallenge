@@ -2,7 +2,7 @@ import axios from "axios";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 
-const productsApi = axios.create({
+export const productsApi = axios.create({
     baseURL: 'http://localhost:5045/'
 });
 
@@ -16,7 +16,7 @@ productsApi.interceptors.request.use((config) => {
     return config;
 });
 
-const paymentsApi = axios.create({
+export const paymentsApi = axios.create({
     baseURL: 'http://localhost:5228/v1/'
 });
 
@@ -29,5 +29,3 @@ paymentsApi.interceptors.request.use((config) => {
     config.headers['X-Api-Key'] = apiKey;
     return config;
 });
-
-export default { productsApi, paymentsApi };

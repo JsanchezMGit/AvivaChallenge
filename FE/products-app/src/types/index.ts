@@ -5,8 +5,20 @@ export type Order = {
   status: 'Pending' | 'Paid' | 'Cancelled';
   paymentMethod: string;
   fees?: Fee[];
-  products?: Product[];
+  products: Product[];
   provider: string;
+}
+
+export type OrderRquest = {
+  method: string;
+  products: Product[];
+}
+
+export type OrderFormData = {
+  trackingNumber: string;
+  origin: string;
+  destination: string;
+  recipient: string;
 }
 
 export type OrderStatusChange = {
@@ -22,6 +34,14 @@ export type Fee = {
 export type Product = {
   name: string;
   amount: number;
+}
+
+export type ProductDetail = {
+  id: number;
+  name: string;
+  description: string;
+  status: string;
+  price: number;
 }
 
 export type StatusType = 'Pending' | 'Paid' | 'Cancelled';
@@ -40,6 +60,7 @@ export const statusClasses: Record<StatusType, string> = {
 
 export type AppState = {
   orders: Order[];
+  products: ProductDetail[];
   status: string;
   error: string | null;
 }
@@ -54,3 +75,4 @@ export const FETCH_ORDER = "orders/get";
 export const CREATE_ORDER = "orders/post";
 export const PATCH_ORDER = "orders/patch";
 export const DELETE_ORDER = "orders/delete";
+export const FETCH_PRODUCTS = "products";

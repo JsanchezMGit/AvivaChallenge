@@ -1,0 +1,80 @@
+@media (max-width: 750px) {
+  .status-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+.action-btn {
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 0.5rem;
+}
+.action-btn--cancel {
+  background-color: #ca1c1c;
+  color: #fff;
+}
+.action-btn--cancel:disabled, .action-btn--cancel[disabled] {
+  background-color: #666 !important;
+  cursor: not-allowed !important;
+  opacity: 0.7 !important;
+  transform: none !important;
+}
+.action-btn--cancel:disabled:hover, .action-btn--cancel[disabled]:hover {
+  opacity: 0.7 !important;
+  transform: none !important;
+}
+.action-btn--cancel:disabled i, .action-btn--cancel[disabled] i {
+  opacity: 0.5;
+}
+.action-btn--pay {
+  background-color: #08bf14;
+  color: #fff;
+}
+.action-btn--pay:disabled, .action-btn--pay[disabled] {
+  background-color: #666 !important;
+  cursor: not-allowed !important;
+  opacity: 0.7 !important;
+  transform: none !important;
+}
+.action-btn--pay:disabled:hover, .action-btn--pay[disabled]:hover {
+  opacity: 0.7 !important;
+  transform: none !important;
+}
+.action-btn--pay:disabled i, .action-btn--pay[disabled] i {
+  opacity: 0.5;
+}  
+.action-btn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+@media (max-width: 1115px) {
+  .action-btn {
+    width: 30px;
+    height: 30px;
+    margin-right: 0.3rem;
+  }
+}
+@media (max-width: 750px) {
+  .action-btn {
+    width: 28px;
+    height: 28px;
+    margin-left: 0.25rem;
+  }
+}
+
+@media (max-width: 750px) {
+  .action-buttons {
+    position: absolute;
+    right: 0.75rem;
+    top: 0.75rem;
+  }
+}
