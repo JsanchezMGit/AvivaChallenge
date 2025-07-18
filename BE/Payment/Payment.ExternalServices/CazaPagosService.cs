@@ -9,11 +9,11 @@ namespace Payment.ExternalServices;
 
 public class CazaPagosService : PaymentServicePartial, ICazaPagosService
 {
-    public CazaPagosService(HttpClient httpClient) : base(httpClient){ }
+    public CazaPagosService(HttpClient httpClient) : base(httpClient) { }
 
     public async Task CancelOrderAsync(string id)
     {
-        var response = await _httpClient.PutAsync($"{_httpClient.BaseAddress}/cancel?id={id}", new StringContent(string.Empty));
+        var response = await _httpClient.PutAsync($"{_httpClient.BaseAddress}/cancellation?id={id}", new StringContent(string.Empty));
         response.EnsureSuccessStatusCode();
     }
 
@@ -41,7 +41,7 @@ public class CazaPagosService : PaymentServicePartial, ICazaPagosService
 
     public async Task PayOrderAsync(string id)
     {
-        var response = await _httpClient.PutAsync($"{_httpClient.BaseAddress}/pay?id={id}", new StringContent(string.Empty));
+        var response = await _httpClient.PutAsync($"{_httpClient.BaseAddress}/payment?id={id}", new StringContent(string.Empty));
         response.EnsureSuccessStatusCode();
     }
 

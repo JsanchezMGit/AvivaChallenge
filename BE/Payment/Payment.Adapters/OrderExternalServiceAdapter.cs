@@ -19,9 +19,12 @@ public class OrderExternalServiceAdapter : IExternalServiceAdapter
         {
             [OrderProvider.CazaPagos] = () => cazaPagosService,
             [OrderProvider.PagaFacil] = () => pagaFacilService
-        };        
+        };
         _mapper = mapper;
     }
+
+    public async Task CancelOrderAsync(string id, OrderProvider provider) =>
+        await ExecuteProviderOperationAsync(provider, p => p.CancelOrderAsync(id));
 
     public async Task<OrderEntity> GetOrderAsync(string id, OrderProvider provider)
     {
@@ -29,7 +32,7 @@ public class OrderExternalServiceAdapter : IExternalServiceAdapter
             provider,
             p => p.GetOrderAsync(id),
             _mapper.ToEntity);
-        order.Provider = provider;            
+        order.Provider = provider;
         return order;
     }
 
@@ -39,14 +42,17 @@ public class OrderExternalServiceAdapter : IExternalServiceAdapter
             provider,
             p => p.GetOrdersAsync(),
             orders => orders.Select(_mapper.ToEntity).ToList());
-            
+
         foreach (var order in orders)
             order.Provider = provider;
         return orders;
     }
 
+    public async Task PayOrderAsync(string id, OrderProvider provider) =>
+        await ExecuteProviderOperationAsync(provider, p => p.PayOrderAsync(id));
+
     public async Task<OrderEntity> SetOrderAsync(OrderRequestDTO orderRequest, OrderProvider provider)
-    { 
+    {
         var order = await ExecuteProviderOperationAsync(
             provider,
             p => p.SetOrderAsync(orderRequest),
@@ -68,5 +74,18 @@ public class OrderExternalServiceAdapter : IExternalServiceAdapter
         var provider = resolver();
         var result = await providerOperation(provider);
         return resultMapper(result);
-    }    
+    }
+    
+    private async Task ExecuteProviderOperationAsync(
+        OrderProvider providerName,
+        Func<IExternalService, Task> providerOperation)
+    {
+        if (!_providerResolvers.TryGetValue(providerName, out var resolver))
+        {
+            throw new ArgumentException($"Proveedor no soportado: {providerName}");
+        }
+
+        var provider = resolver();
+        await providerOperation(provider);
+    }     
 }

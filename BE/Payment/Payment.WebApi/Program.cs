@@ -28,6 +28,8 @@ builder.Services.AddScoped<IMapper<OrderResponseDTO, OrderEntity>, OrderMapper>(
 builder.Services.AddScoped<GetOrdersUseCase>();
 builder.Services.AddScoped<SetOrderUseCase>();
 builder.Services.AddScoped<GetOrderUseCase>();
+builder.Services.AddScoped<CancelOrderUseCase>();
+builder.Services.AddScoped<PayOrderUseCase>();
 builder.Services.AddScoped<SyncOrdersUseCase>();
 ExternalServicesConfiguration.SetConfig(builder);
 

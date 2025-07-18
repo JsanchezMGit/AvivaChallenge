@@ -8,8 +8,7 @@ public static class OrdersEndpoint
 {
     public static void PostOrderEndpoint(WebApplication app)
     {
-        app.MapPost("/v1/orders", async ([FromBody] OrderRequestDTO orderRequest, [FromServices] SetOrderUseCase setOrderUseCase) =>
-        {
+        app.MapPost("/v1/orders", async ([FromBody] OrderRequestDTO orderRequest, [FromServices] SetOrderUseCase setOrderUseCase) => {
             return await setOrderUseCase.ExecuteAsync(orderRequest);
         })
         .WithName("PostOrder")
@@ -19,8 +18,7 @@ public static class OrdersEndpoint
     public static void GetOrdersEndpoint(WebApplication app)
     {
 
-        app.MapGet("/v1/orders", async (GetOrdersUseCase getOrdersUseCase) =>
-        {
+        app.MapGet("/v1/orders", async (GetOrdersUseCase getOrdersUseCase) => {
             return await getOrdersUseCase.ExecuteAsync();
         })
         .WithName("GetOrders")
@@ -29,8 +27,7 @@ public static class OrdersEndpoint
 
     public static void GetOrderEndpoint(WebApplication app)
     {
-        app.MapGet("/v1/orders/{id}", async (string id, GetOrderUseCase getOrderUseCase) =>
-        {
+        app.MapGet("/v1/orders/{id}", async (string id, GetOrderUseCase getOrderUseCase) => {
             return await getOrderUseCase.ExecuteAsync(id);
         })
         .WithName("GetOrder")
@@ -39,16 +36,17 @@ public static class OrdersEndpoint
 
     public static void CancelOrderEndpoint(WebApplication app)
     {
-        app.MapDelete("/v1/orders/{id}", (string id) =>
-        {
+        app.MapDelete("/v1/orders/{id}", async (string id, CancelOrderUseCase cancelOrderUseCase) => {
+            await cancelOrderUseCase.ExecuteAsync(id);
         })
         .WithName("CancelOrder")
         .WithOpenApi();
     }
     
     public static void PayOrderEndpoint(WebApplication app)
-    { 
-        app.MapPatch("/v1/orders/{id}", (string id) => { 
+    {
+        app.MapPatch("/v1/orders/{id}", async (string id, PayOrderUseCase payOrderUseCase) => {
+            await payOrderUseCase.ExecuteAsync(id);
         })
         .WithName("PayOrder")
         .WithOpenApi();
