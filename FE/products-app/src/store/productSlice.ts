@@ -3,13 +3,15 @@ import {
   type AppState,
   IDLE, LOADING, SUCCEEDED, FAILED,
   FETCH_PRODUCTS,
-  type ProductDetail
-} from '../types/index';
+  type ProductDetail,
+  type Product
+} from '../types/Index';
 import { productsApi } from '../api';
 
 const initialState: AppState = {
   orders: [],
   products: [],
+  selectedProducts: [],
   status: IDLE,
   error: null
 };
@@ -28,6 +30,15 @@ const productsSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
+    changeSelectedProduct: (state, action: PayloadAction<ProductDetail>) => {
+      const selectedProduct = action.payload;
+      const index = state.selectedProducts.findIndex(product => product.id === selectedProduct.id);
+      if (index === -1) {
+        state.selectedProducts.push({ id: selectedProduct.id, name: selectedProduct.name, unitPrice: selectedProduct.price } as Product);
+      } else {
+        state.selectedProducts.splice(index, 1);
+      }
+    },    
   },
   extraReducers: (builder) => {
     builder
@@ -46,6 +57,6 @@ const productsSlice = createSlice({
   }
 });
 
-export const { } = productsSlice.actions;
+export const { changeSelectedProduct } = productsSlice.actions;
 
 export default productsSlice.reducer;

@@ -1,13 +1,15 @@
-import { type ProductDetail } from '../../types/index';
+import { type Product, type ProductDetail } from '../../types/Index';
 import { formatCurrency } from '../../utils/Index';
 import './index.css';
 
 interface ProductListProps {
   products: ProductDetail[];
+  selectedProducts: Product[];
+  onShowOrderRequest: () => void;
+  onProductCheckChange: (product: ProductDetail) => void;
 }
 
-const OrderList = ({ products }: ProductListProps) => {
-
+const OrderList = ({ products, selectedProducts, onShowOrderRequest, onProductCheckChange }: ProductListProps) => {
   return (
     <section className="product__list" id="lista" aria-labelledby="product-title">
       <h2 id="product-title"><i className="fas fa-list-check"></i> Productos</h2>
@@ -30,7 +32,11 @@ const OrderList = ({ products }: ProductListProps) => {
             ) : (
               products.map(product => (
                 <tr key={product.id}>
-                  <td><input type="checkbox" value={product.id} /></td>
+                  <td>
+                    <input type="checkbox"
+                      checked={selectedProducts.some(p => p.id === product.id)} 
+                      onChange={() => onProductCheckChange(product)}  />
+                  </td>
                   <td data-label="Nombre">{product.name}</td>
                   <td data-label="etalle">{product.description}</td>
                   <td data-label="Estatus">{product.status}</td>
@@ -42,7 +48,7 @@ const OrderList = ({ products }: ProductListProps) => {
         </table>
       </div>
       <div className='buttons-container'>
-        <button type="button" className="button__prymary" aria-label="Crear orden" aria-controls="guide-form" role="button">Crear Orden</button>
+        <button onClick={() => onShowOrderRequest()} type="button" className="button__prymary" aria-label="Crear orden" aria-controls="guide-form" role="button">Crear Orden</button>
       </div>
     </section>
   );

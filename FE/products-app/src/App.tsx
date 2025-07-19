@@ -6,7 +6,7 @@ import { useProducts } from './hooks/useProducts';
 
 function App() {
   const { state: orderState, fetchOrders, patchOrder, deleteOrder } = useOrders();
-  const { state: productState, fetchProducts } = useProducts();
+  const { state: productState, fetchProducts, changeSelectedProduct } = useProducts();
 
   const initialRender = useRef(true);
 
@@ -21,7 +21,12 @@ function App() {
   return (
     <div className="App">
       <main className="main-content">
-        <ProductList products={productState.products} />
+        <ProductList
+          products={productState.products}
+          selectedProducts={productState.selectedProducts}
+          onShowOrderRequest={() => {}}
+          onProductCheckChange={changeSelectedProduct}
+        />
         <OrderList
           orders={orderState.orders}
           onCancel={deleteOrder}

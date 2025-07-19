@@ -5,12 +5,13 @@ import {
   FETCH_ORDERS, PATCH_ORDER,
   DELETE_ORDER,
   type OrderStatusChange
-} from '../types/index';
+} from '../types/Index';
 import { paymentsApi } from '../api';
 
 const initialState: AppState = {
   orders: [],
   products: [],
+  selectedProducts: [],
   status: IDLE,
   error: null
 };

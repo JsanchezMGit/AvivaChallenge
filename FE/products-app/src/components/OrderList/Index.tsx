@@ -1,4 +1,4 @@
-import { statusClasses, statusLabels, type Order } from '../../types/index';
+import { statusClasses, statusLabels, type Order } from '../../types/Index';
 import './index.css';
 
 interface OrderListProps {

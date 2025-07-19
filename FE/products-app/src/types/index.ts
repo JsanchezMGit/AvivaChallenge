@@ -32,8 +32,9 @@ export type Fee = {
 }
 
 export type Product = {
+  id: number;
   name: string;
-  amount: number;
+  unitPrice: number;
 }
 
 export type ProductDetail = {
@@ -61,6 +62,7 @@ export const statusClasses: Record<StatusType, string> = {
 export type AppState = {
   orders: Order[];
   products: ProductDetail[];
+  selectedProducts: Product[];
   status: string;
   error: string | null;
 }
