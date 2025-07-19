@@ -6,7 +6,8 @@ import {
   patchOrder as patchOrderAction,
   deleteOrder as deleteOrderAction,
   setPaymentMethod as setPaymentMethodAction,
-  changeSelectedProduct as changeSelectedProductAction
+  changeSelectedProduct as changeSelectedProductAction,
+  resetOrderRequest as resetOrderRequestAction
 } from '../store/orderSlice';
 import type { ProductDetail } from '../types/Index';
 
@@ -37,6 +38,10 @@ export function useOrders() {
     const changeSelectedProduct = (product: ProductDetail) => {
         dispatch(changeSelectedProductAction(product));
     };
+    
+    const resetOrderRequest = () => {
+        dispatch(resetOrderRequestAction());
+    };
 
   return {
     orderState,
@@ -45,6 +50,7 @@ export function useOrders() {
     patchOrder,
     deleteOrder,
     setPaymentMethod,
-    changeSelectedProduct
+    changeSelectedProduct,
+    resetOrderRequest
   };
 }

@@ -360,5 +360,22 @@ dotnet clean
 dotnet build
 ```
 
+## ⚠️ NOTA MUY IMPORTANTE
+
+Una vez que todos los proyectos estén compilados y ejecutándose correctamente, es **NECESARIO** ejecutar el siguiente comando para realizar la sincronización de los datos de los proveedores:
+
+```bash
+curl -X PATCH -H "X-Api-Key: 72P4gUoC0E+MD9o9xhp9fQ==" http://localhost:5228/sync/orders
+```
+
+**¿Por qué es necesario?**
+- El proyecto de la API de Payment utiliza una base de datos en memoria
+- Los datos de los proveedores necesitan ser sincronizados para el correcto funcionamiento
+- Sin esta sincronización, la aplicación no mostrará información completa
+
+⚡ **Ejecuta este comando después de que ambas APIs estén corriendo** para garantizar que la aplicación funcione correctamente.
+
+---
+
 📄 Licencia
 Este proyecto es solo de referencia / evaluación técnica. Licencia libre.

@@ -77,8 +77,12 @@ const ordersSlice = createSlice({
         state.orderRequest.products.push({ id: selectedProduct.id, name: selectedProduct.name, unitPrice: selectedProduct.price } as Product);
       } else {
         state.orderRequest.products.splice(index, 1);
-      }
-    },    
+      }   
+    },
+    resetOrderRequest: (state) => {
+        state.orderRequest.method = 'Cash';
+        state.orderRequest.products = [];
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -138,5 +142,5 @@ const ordersSlice = createSlice({
       });
   }
 });
-export const { setPaymentMethod, changeSelectedProduct } = ordersSlice.actions;
+export const { setPaymentMethod, changeSelectedProduct, resetOrderRequest } = ordersSlice.actions;
 export default ordersSlice.reducer;

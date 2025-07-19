@@ -76,6 +76,12 @@ export type ProductState = {
   error: string | null;
 }
 
+export type AlertState = {
+    show: boolean;
+    message: string;
+    type: 'success' | 'error';
+};
+
 export const IDLE = "idle";
 export const LOADING = "loading";
 export const SUCCEEDED = "succeeded";
