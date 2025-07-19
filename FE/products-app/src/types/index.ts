@@ -58,11 +58,20 @@ export const statusClasses: Record<StatusType, string> = {
   'Paid': 'badge--paid',
   'Cancelled': 'badge--cancelled'
 };
+export type ModalState = {
+  show: boolean;
+  title: string;
+}
 
-export type AppState = {
+export type OrderState = {
   orders: Order[];
+  orderRequest: OrderRquest;
+  status: string;
+  error: string | null;
+}
+
+export type ProductState = {
   products: ProductDetail[];
-  selectedProducts: Product[];
   status: string;
   error: string | null;
 }

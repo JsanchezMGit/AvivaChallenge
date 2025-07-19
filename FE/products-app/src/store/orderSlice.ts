@@ -1,20 +1,37 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { 
-  type AppState, type Order, 
+  type Order, 
   IDLE, LOADING, SUCCEEDED, FAILED,
   FETCH_ORDERS, PATCH_ORDER,
   DELETE_ORDER,
-  type OrderStatusChange
+  type OrderStatusChange,
+  CREATE_ORDER,
+  type OrderRquest,
+  type OrderState,
+  type ProductDetail,
+  type Product
 } from '../types/Index';
 import { paymentsApi } from '../api';
 
-const initialState: AppState = {
+const initialState: OrderState = {
   orders: [],
-  products: [],
-  selectedProducts: [],
+  orderRequest: {
+    products: [],
+    method: 'Cash'
+  },
   status: IDLE,
   error: null
 };
+
+export const createOrder = createAsyncThunk(CREATE_ORDER, async (order: OrderRquest) => {
+  try {
+    const response = await paymentsApi.post('orders', order);
+    return response.data as Order;
+  } catch (error) {
+    console.error('Ocurrio un error al intentar crear la orden', error);
+    throw error;
+  }
+});
 
 export const fetchOrders = createAsyncThunk(FETCH_ORDERS, async () => {
     try {
@@ -50,15 +67,33 @@ const ordersSlice = createSlice({
   name: 'orders',
   initialState,
   reducers: {
-    setOrders: (state, action: PayloadAction<Order[]>) => {
-      state.orders = action.payload;
+    setPaymentMethod: (state, action: PayloadAction<string>) => {
+      state.orderRequest.method = action.payload;
     },
-    addOrder: (state, action: PayloadAction<Order>) => {
-      state.orders.push(action.payload);
-    }
+    changeSelectedProduct: (state, action: PayloadAction<ProductDetail>) => {
+      const selectedProduct = action.payload;
+      const index = state.orderRequest.products.findIndex(product => product.id === selectedProduct.id);
+      if (index === -1) {
+        state.orderRequest.products.push({ id: selectedProduct.id, name: selectedProduct.name, unitPrice: selectedProduct.price } as Product);
+      } else {
+        state.orderRequest.products.splice(index, 1);
+      }
+    },    
   },
   extraReducers: (builder) => {
     builder
+      .addCase(createOrder.pending, (state) => {
+        state.status = LOADING;
+        state.error = null;
+      })
+      .addCase(createOrder.fulfilled, (state, action: PayloadAction<Order>) => {
+        state.status = SUCCEEDED;
+        state.orders.push(action.payload);
+      })
+      .addCase(createOrder.rejected, (state, action) => {
+        state.status = FAILED;
+        state.error = action.error.message || 'Ocurrio un error al crear la orden';
+      })    
       .addCase(fetchOrders.pending, (state) => {
         state.status = LOADING;
         state.error = null;
@@ -103,7 +138,5 @@ const ordersSlice = createSlice({
       });
   }
 });
-
-export const { setOrders, addOrder } = ordersSlice.actions;
-
+export const { setPaymentMethod, changeSelectedProduct } = ordersSlice.actions;
 export default ordersSlice.reducer;

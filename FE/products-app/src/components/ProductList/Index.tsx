@@ -1,11 +1,11 @@
 import { type Product, type ProductDetail } from '../../types/Index';
 import { formatCurrency } from '../../utils/Index';
-import './index.css';
+import './Index.css';
 
 interface ProductListProps {
   products: ProductDetail[];
   selectedProducts: Product[];
-  onShowOrderRequest: () => void;
+  onShowOrderRequest: (tittle: string) => void;
   onProductCheckChange: (product: ProductDetail) => void;
 }
 
@@ -34,6 +34,7 @@ const OrderList = ({ products, selectedProducts, onShowOrderRequest, onProductCh
                 <tr key={product.id}>
                   <td>
                     <input type="checkbox"
+                      disabled={product.status !== 'Available'}
                       checked={selectedProducts.some(p => p.id === product.id)} 
                       onChange={() => onProductCheckChange(product)}  />
                   </td>
@@ -47,8 +48,8 @@ const OrderList = ({ products, selectedProducts, onShowOrderRequest, onProductCh
           </tbody>
         </table>
       </div>
-      <div className='buttons-container'>
-        <button onClick={() => onShowOrderRequest()} type="button" className="button__prymary" aria-label="Crear orden" aria-controls="guide-form" role="button">Crear Orden</button>
+      <div className='controls-container'>
+        <button disabled={selectedProducts.length === 0} onClick={() => onShowOrderRequest('Nueva Orden')} type="button" className="button__prymary" aria-label="Crear orden" aria-controls="order-form" role="button">Crear Orden</button>
       </div>
     </section>
   );

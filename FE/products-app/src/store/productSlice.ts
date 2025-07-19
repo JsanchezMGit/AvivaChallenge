@@ -1,19 +1,16 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { 
-  type AppState,
   IDLE, LOADING, SUCCEEDED, FAILED,
   FETCH_PRODUCTS,
   type ProductDetail,
-  type Product
+  type ProductState
 } from '../types/Index';
 import { productsApi } from '../api';
 
-const initialState: AppState = {
-  orders: [],
+const initialState: ProductState = {
   products: [],
-  selectedProducts: [],
   status: IDLE,
-  error: null
+  error: null,
 };
 
 export const fetchProducts = createAsyncThunk(FETCH_PRODUCTS, async () => {
@@ -29,17 +26,7 @@ export const fetchProducts = createAsyncThunk(FETCH_PRODUCTS, async () => {
 const productsSlice = createSlice({
   name: 'products',
   initialState,
-  reducers: {
-    changeSelectedProduct: (state, action: PayloadAction<ProductDetail>) => {
-      const selectedProduct = action.payload;
-      const index = state.selectedProducts.findIndex(product => product.id === selectedProduct.id);
-      if (index === -1) {
-        state.selectedProducts.push({ id: selectedProduct.id, name: selectedProduct.name, unitPrice: selectedProduct.price } as Product);
-      } else {
-        state.selectedProducts.splice(index, 1);
-      }
-    },    
-  },
+  reducers: { },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
@@ -57,6 +44,6 @@ const productsSlice = createSlice({
   }
 });
 
-export const { changeSelectedProduct } = productsSlice.actions;
+export const { actions, reducer } = productsSlice;
 
 export default productsSlice.reducer;

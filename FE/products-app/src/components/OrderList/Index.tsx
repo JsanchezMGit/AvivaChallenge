@@ -1,5 +1,5 @@
 import { statusClasses, statusLabels, type Order } from '../../types/Index';
-import './index.css';
+import './Index.css';
 
 interface OrderListProps {
   orders: Order[];

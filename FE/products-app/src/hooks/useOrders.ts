@@ -1,14 +1,23 @@
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '../store/store';
 import {
+  createOrder as createOrderAction,
   fetchOrders as fectchOrdersAction,
   patchOrder as patchOrderAction,
-  deleteOrder as deleteOrderAction
+  deleteOrder as deleteOrderAction,
+  setPaymentMethod as setPaymentMethodAction,
+  changeSelectedProduct as changeSelectedProductAction
 } from '../store/orderSlice';
+import type { ProductDetail } from '../types/Index';
 
 export function useOrders() {
-    const state = useSelector((state: RootState) => state.orders);
+    const orderState = useSelector((state: RootState) => state.orders);
     const dispatch = useDispatch<AppDispatch>();
+
+    const createOrder = async () => {
+        await dispatch(createOrderAction(orderState.orderRequest));
+    };
+
     const fetchOrders = async () => {
         await dispatch(fectchOrdersAction());
     };
@@ -21,10 +30,21 @@ export function useOrders() {
         await dispatch(deleteOrderAction(id));
     };
 
+    const setPaymentMethod = (paymentMethod: string) => {
+        dispatch(setPaymentMethodAction(paymentMethod));
+    };
+    
+    const changeSelectedProduct = (product: ProductDetail) => {
+        dispatch(changeSelectedProductAction(product));
+    };
+
   return {
-    state,
+    orderState,
+    createOrder,
     fetchOrders,
     patchOrder,
-    deleteOrder
+    deleteOrder,
+    setPaymentMethod,
+    changeSelectedProduct
   };
 }

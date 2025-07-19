@@ -244,6 +244,12 @@ html {
 .button__prymary:hover {
   background-color: #2980b9;
 }
+.button__prymary:disabled {
+  background-color: #666 !important;
+  cursor: not-allowed !important;
+  opacity: 0.7 !important;
+  transform: none !important;
+}
 @media (max-width: 750px) {
   .button__prymary {
     padding: 0.8rem;
@@ -251,7 +257,7 @@ html {
   }
 }
 
-.buttons-container {
+.controls-container {
     display: flex;
     margin-top: 0.5rem;
     justify-content: flex-end;
